@@ -13,18 +13,18 @@
 body {
   margin: 0;
   min-width: 320px;
-  background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+  background: linear-gradient(135deg, #f8fafc 0%, #f0f9ff 50%, #f1f5f9 100%);
   font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
   transition: background 0.3s ease;
 }
 
 .dark body {
-  background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+  background: linear-gradient(135deg, #0f172a 0%, #1a1f3a 50%, #1e293b 100%);
 }
 
 @layer components {
   .panel {
-    @apply rounded-lg border border-slate-200 bg-white shadow-soft transition dark:border-slate-700 dark:bg-slate-900;
+    @apply rounded-xl border border-slate-200 bg-white shadow-soft transition hover:shadow-md dark:border-slate-700 dark:bg-slate-900;
   }
 
   .dark .panel {
@@ -32,24 +32,25 @@ body {
   }
 
   .btn-primary {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-r from-primary-600 to-primary-500 px-4 py-2.5 text-sm font-semibold text-white shadow-md transition hover:from-primary-700 hover:to-primary-600 hover:shadow-lg disabled:cursor-not-allowed disabled:opacity-60 active:scale-95;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg bg-gradient-to-br from-primary-600 via-primary-500 to-primary-400 px-4 py-2.5 text-sm font-bold text-white shadow-lg hover:shadow-primary-500/50 transition-all hover:from-primary-700 hover:via-primary-600 hover:to-primary-500 disabled:cursor-not-allowed disabled:opacity-60 active:scale-95;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center gap-2 rounded-lg border border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 hover:border-slate-400 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700 dark:hover:border-slate-500 active:scale-95;
+    @apply inline-flex items-center justify-center gap-2 rounded-lg border-2 border-slate-300 bg-white px-4 py-2.5 text-sm font-semibold text-slate-700 transition hover:bg-slate-50 hover:border-slate-400 active:scale-95 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:hover:bg-slate-700 dark:hover:border-slate-500;
   }
 
   .input {
-    @apply w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-primary-500 focus:ring-2 focus:ring-primary-200 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:placeholder:text-slate-500 dark:focus:ring-primary-900;
+    @apply w-full rounded-xl border-2 border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition placeholder:text-slate-400 focus:border-primary-500 focus:ring-4 focus:ring-primary-200/50 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:placeholder:text-slate-500 dark:focus:ring-primary-900/30;
   }
 
   select.input option {
     background: #ffffff;
     color: #0f172a;
+    padding: 8px;
   }
 
   select.input option:checked {
-    background: #8b5cf6;
+    background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
     color: #ffffff;
   }
 
@@ -59,45 +60,49 @@ body {
   }
 
   .dark select.input option:checked {
-    background: #7c3aed;
+    background: linear-gradient(135deg, #7c3aed 0%, #6d28d9 100%);
     color: #ffffff;
   }
 
   select.input {
-    @apply w-full rounded-lg border border-slate-300 bg-white px-3.5 py-2.5 text-sm text-slate-900 outline-none transition focus:border-primary-500 focus:ring-2 focus:ring-primary-200 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:focus:ring-primary-900;
+    @apply w-full rounded-xl border-2 border-slate-300 bg-white px-4 py-3 text-sm text-slate-900 outline-none transition focus:border-primary-500 focus:ring-4 focus:ring-primary-200/50 dark:border-slate-600 dark:bg-slate-800 dark:text-slate-100 dark:focus:ring-primary-900/30;
   }
 
   .badge {
-    @apply inline-flex items-center rounded-full px-3 py-1 text-xs font-semibold;
+    @apply inline-flex items-center rounded-full px-3 py-1.5 text-xs font-bold;
   }
 
   .badge-primary {
-    @apply badge bg-primary-100 text-primary-700 dark:bg-primary-950 dark:text-primary-200;
+    @apply badge bg-gradient-to-r from-primary-100 to-primary-50 text-primary-700 dark:from-primary-950 dark:to-primary-900 dark:text-primary-200;
   }
 
   .badge-success {
-    @apply badge bg-success-100 text-success-700 dark:bg-success-950 dark:text-success-200;
+    @apply badge bg-gradient-to-r from-success-100 to-success-50 text-success-700 dark:from-success-950 dark:to-success-900 dark:text-success-200;
   }
 
   .badge-warning {
-    @apply badge bg-warning-100 text-warning-700 dark:bg-warning-950 dark:text-warning-200;
+    @apply badge bg-gradient-to-r from-warning-100 to-warning-50 text-warning-700 dark:from-warning-950 dark:to-warning-900 dark:text-warning-200;
   }
 
   .badge-danger {
-    @apply badge bg-danger-100 text-danger-700 dark:bg-danger-950 dark:text-danger-200;
+    @apply badge bg-gradient-to-r from-danger-100 to-danger-50 text-danger-700 dark:from-danger-950 dark:to-danger-900 dark:text-danger-200;
   }
 
   .badge-slate {
-    @apply badge bg-slate-100 text-slate-700 dark:bg-slate-800 dark:text-slate-200;
+    @apply badge bg-gradient-to-r from-slate-100 to-slate-50 text-slate-700 dark:from-slate-800 dark:to-slate-900 dark:text-slate-200;
   }
 }
 
 @layer utilities {
   .text-gradient {
-    @apply bg-gradient-to-r from-primary-600 to-brand-600 bg-clip-text text-transparent;
+    @apply bg-gradient-to-br from-primary-600 via-primary-500 to-brand-500 bg-clip-text text-transparent;
   }
 
   .transition-smooth {
     @apply transition duration-300 ease-in-out;
+  }
+
+  .glow-primary {
+    @apply shadow-lg shadow-primary-500/30;
   }
 }
