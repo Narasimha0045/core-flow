@@ -8,14 +8,26 @@ const populateProject = (query) =>
 
 export const createProject = async (req, res, next) => {
   try {
+    const existingProject = await Project.findOne({
+      admin: req.user._id,
+      name: { $regex: `^${req.body.name.trim()}$`, $options: 'i' }
+    });
+
+    if (existingProject) {
+      return res.status(409).json({
+        message: 'Project with this name already exists'
+      });
+    }
+
     const project = await Project.create({
-      name: req.body.name,
+      name: req.body.name.trim(),
       description: req.body.description || '',
       admin: req.user._id,
       members: [req.user._id]
     });
 
     const populated = await populateProject(Project.findById(project._id));
+
     res.status(201).json({
       ...populated.toObject(),
       role: 'Admin'
