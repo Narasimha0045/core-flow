@@ -49,16 +49,21 @@ const ProjectDetails = () => {
   };
 
   const saveTask = async (payload) => {
-    if (editingTask) {
-      const { data } = await api.put(`/tasks/${editingTask._id}`, payload);
-      setTasks(tasks.map((task) => (task._id === data._id ? data : task)));
-    } else {
-      const { data } = await api.post('/tasks', payload);
-      setTasks([data, ...tasks]);
-      refreshProject();
+    try {
+      if (editingTask) {
+        const { data } = await api.put(`/tasks/${editingTask._id}`, payload);
+        setTasks(tasks.map((task) => (task._id === data._id ? data : task)));
+      } else {
+        const { data } = await api.post('/tasks', payload);
+        setTasks([data, ...tasks]);
+        refreshProject();
+      }
+
+      setTaskModal(false);
+      setEditingTask(null);
+    } catch (err) {
+      setNotice(getErrorMessage(err));
     }
-    setTaskModal(false);
-    setEditingTask(null);
   };
 
   const updateStatus = async (taskId, status) => {
@@ -139,6 +144,13 @@ const ProjectDetails = () => {
       </div>
       {taskModal && (
         <Modal title={editingTask ? 'Edit task' : 'Create task'} onClose={() => { setTaskModal(false); setEditingTask(null); }}>
+
+          {notice && (
+            <div className="mb-4 rounded-lg bg-danger-50 p-3 text-sm font-semibold text-danger-700 dark:bg-danger-950 dark:text-danger-200">
+              {notice}
+            </div>
+          )}
+
           <TaskForm
             members={project.members}
             projectId={project._id}

@@ -113,3 +113,26 @@ export const removeMember = async (req, res, next) => {
     next(error);
   }
 };
+
+export const deleteProject = async (req, res, next) => {
+  try {
+
+    const project = await ensureProjectAdmin(
+      req.params.id,
+      req.user._id
+    );
+
+    await Task.deleteMany({
+      project: project._id
+    });
+
+    await project.deleteOne();
+
+    res.json({
+      message: 'Project deleted successfully'
+    });
+
+  } catch (error) {
+    next(error);
+  }
+};

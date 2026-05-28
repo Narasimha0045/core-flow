@@ -3,6 +3,7 @@ import { body, param } from 'express-validator';
 import {
   addMember,
   createProject,
+  deleteProject,
   getProjectById,
   getProjects,
   removeMember
@@ -51,6 +52,12 @@ router.delete(
   ],
   validateRequest,
   removeMember
+);
+router.delete(
+  '/:id',
+  [param('id').isMongoId().withMessage('Valid project id is required')],
+  validateRequest,
+  deleteProject
 );
 
 export default router;

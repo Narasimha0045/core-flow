@@ -19,6 +19,16 @@ export const createTask = async (req, res, next) => {
     if (!project.members.some((id) => id.toString() === req.body.assignedTo)) {
       return res.status(400).json({ message: 'Assigned user must be a project member' });
     }
+    const existingTask = await Task.findOne({
+      title: req.body.title.trim(),
+      project: req.body.project
+    });
+
+    if (existingTask) {
+      return res.status(409).json({
+        message: 'Task with this title already exists'
+      });
+    }
 
     const task = await Task.create({
       title: req.body.title,
@@ -65,6 +75,16 @@ export const updateTask = async (req, res, next) => {
 
     if (!task) {
       return res.status(404).json({ message: 'Task not found' });
+    }
+    const existingTask = await Task.findOne({
+      title: req.body.title.trim(),
+      project: req.body.project
+    });
+
+    if (existingTask) {
+      return res.status(409).json({
+        message: 'Task with this title already exists'
+      });
     }
 
     const project = await ensureProjectAdmin(task.project, req.user._id);

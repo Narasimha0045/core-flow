@@ -1,4 +1,4 @@
-import { FolderKanban, Plus } from 'lucide-react';
+import { FolderKanban, Plus, Trash2 } from 'lucide-react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import api from '../api/axios.js';
@@ -30,6 +30,26 @@ const Projects = () => {
     }
   };
 
+  const deleteProject = async (projectId, event) => {
+    event.preventDefault();
+
+    const confirmed = window.confirm(
+      'Are you sure you want to delete this project?'
+    );
+
+    if (!confirmed) return;
+
+    try {
+      await api.delete(`/projects/${projectId}`);
+
+      setData(
+        projects.filter((project) => project._id !== projectId)
+      );
+    } catch (err) {
+      alert(getErrorMessage(err));
+    }
+  };
+
   return (
     <>
       <PageHeader
@@ -48,6 +68,17 @@ const Projects = () => {
                 <p className="mt-2 line-clamp-2 text-sm text-slate-600 dark:text-slate-400">{project.description || 'No description added.'}</p>
               </div>
               <div className="flex shrink-0 flex-col items-end gap-2">
+
+                {project.role === 'Admin' && (
+                  <button
+                    className="rounded-lg p-2 text-danger-600 hover:bg-danger-50 dark:text-danger-400 dark:hover:bg-danger-900/30 transition-smooth"
+                    onClick={(e) => deleteProject(project._id, e)}
+                    aria-label="Delete project"
+                  >
+                    <Trash2 className="h-4 w-4" />
+                  </button>
+                )}
+
                 <RoleBadge role={project.role} />
                 <span className="rounded-full bg-primary-100 px-3 py-1 text-xs font-bold text-primary-700 dark:bg-primary-900 dark:text-primary-200">{project.members.length} members</span>
               </div>
