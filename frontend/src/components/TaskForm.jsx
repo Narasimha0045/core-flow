@@ -20,15 +20,18 @@ const TaskForm = ({ members = [], initial = {}, projectId, onSubmit, submitLabel
         Task Title
         <input className="input" value={form.title} onChange={(e) => setValue('title', e.target.value)} placeholder="What needs to be done?" required />
       </label>
+
       <label className="grid gap-2 text-sm font-semibold">
         Description
         <textarea className="input min-h-24 resize-none rounded-lg" value={form.description} onChange={(e) => setValue('description', e.target.value)} placeholder="Add more details about this task..." />
       </label>
+
       <div className="grid gap-4 sm:grid-cols-2">
         <label className="grid gap-2 text-sm font-semibold">
           Due date
           <input className="input" type="date" value={form.dueDate} onChange={(e) => setValue('dueDate', e.target.value)} required />
         </label>
+
         <label className="grid gap-2 text-sm font-semibold">
           Assign to
           <select className="input" value={form.assignedTo} onChange={(e) => setValue('assignedTo', e.target.value)} required>
@@ -37,6 +40,7 @@ const TaskForm = ({ members = [], initial = {}, projectId, onSubmit, submitLabel
             ))}
           </select>
         </label>
+
         <label className="grid gap-2 text-sm font-semibold">
           Priority
           <select className="input" value={form.priority} onChange={(e) => setValue('priority', e.target.value)}>
@@ -45,6 +49,7 @@ const TaskForm = ({ members = [], initial = {}, projectId, onSubmit, submitLabel
             <option>High</option>
           </select>
         </label>
+
         <label className="grid gap-2 text-sm font-semibold">
           Status
           <select className="input" value={form.status} onChange={(e) => setValue('status', e.target.value)}>
@@ -54,7 +59,17 @@ const TaskForm = ({ members = [], initial = {}, projectId, onSubmit, submitLabel
           </select>
         </label>
       </div>
-      <button className="btn-primary" disabled={loading || members.length === 0}>{loading ? 'Saving...' : submitLabel}</button>
+
+      <button className="btn-primary" disabled={loading || members.length === 0}>
+        {loading ? (
+          <span className="flex items-center gap-2">
+            <span className="h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent"></span>
+            Saving...
+          </span>
+        ) : (
+          submitLabel
+        )}
+      </button>
     </form>
   );
 };
