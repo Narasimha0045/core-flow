@@ -5,7 +5,7 @@ const AuthLayout = () => (
   <main className="grid min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 lg:grid-cols-[0.9fr_1.1fr] dark:from-slate-950 dark:to-slate-900">
     <section className="hidden bg-gradient-to-br from-primary-700 to-primary-900 p-10 text-white lg:flex lg:flex-col lg:justify-between">
       <div>
-        <div className="text-2xl font-bold">Team Tasks</div>
+        <div className="text-2xl font-bold">Core Flow</div>
         <h1 className="mt-16 max-w-xl text-5xl font-bold leading-tight">Plan projects, assign work, and keep teams moving.</h1>
       </div>
       <div className="grid gap-4 text-sm text-primary-100">
