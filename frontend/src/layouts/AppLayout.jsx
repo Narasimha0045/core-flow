@@ -29,7 +29,7 @@ const AppLayout = () => {
     <aside className="flex h-full w-72 flex-col border-r border-slate-300 bg-gradient-to-b from-white to-slate-50 p-5 dark:border-slate-700 dark:from-slate-900 dark:to-slate-950">
       <div className="flex items-center justify-between">
         <div>
-          <div className="text-gradient text-xl font-bold">Team Tasks</div>
+          <div className="text-gradient text-xl font-bold">Core Flow</div>
           <div className="text-xs text-slate-500 dark:text-slate-400">Collaborative workspace</div>
         </div>
         <button className="rounded-lg p-2 text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800 lg:hidden transition-smooth" onClick={() => setOpen(false)} aria-label="Close menu">
@@ -76,7 +76,7 @@ const AppLayout = () => {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-slate-50 text-slate-900 dark:from-slate-950 dark:via-slate-900 dark:to-slate-950 dark:text-slate-100 transition-smooth">
       <div className="lg:hidden">
         <header className="flex items-center justify-between border-b border-slate-300 bg-white px-4 py-3 dark:border-slate-700 dark:bg-slate-900 shadow-sm">
-          <div className="text-gradient font-bold">Team Tasks</div>
+          <div className="text-gradient font-bold">Core Flow</div>
           <button className="rounded-lg p-2 text-slate-600 hover:bg-slate-100 dark:text-slate-200 dark:hover:bg-slate-800 transition-smooth" onClick={() => setOpen(true)} aria-label="Open menu">
             <Menu className="h-6 w-6" />
           </button>
